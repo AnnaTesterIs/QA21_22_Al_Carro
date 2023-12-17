@@ -1,6 +1,7 @@
 package tests;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
@@ -16,8 +17,11 @@ public class LoginTests extends TestBase {
 
             //Assert if element with text "Logged is success" is present
            Assert.assertEquals(app.getHelperUser().getMessage(),"Logged in success");
-           app.getHelperUser().clickOKButton();
+           //app.getHelperUser().clickOKButton();
 
         }
-
+@AfterMethod
+    public void postConditions(){
+    app.getHelperUser().clickOKButton();
+}
     }

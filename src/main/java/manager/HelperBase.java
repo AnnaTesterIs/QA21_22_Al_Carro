@@ -21,6 +21,7 @@ public class HelperBase {
         }
     }
     public String getMessage(){
+        pause(5000);
         return wd.findElement(By.cssSelector(".dialog-container>h2")).getText();
     }
 
