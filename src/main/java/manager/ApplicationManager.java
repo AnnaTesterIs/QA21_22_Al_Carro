@@ -1,5 +1,6 @@
 package manager;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -20,6 +21,8 @@ public class ApplicationManager {
     public HelperUser getHelperUser() {
         return helperUser;
     }
+
+
     public void stop(){
         wd.quit();
     }

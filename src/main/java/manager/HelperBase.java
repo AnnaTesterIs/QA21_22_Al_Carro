@@ -20,11 +20,24 @@ public class HelperBase {
             element.sendKeys(text);
         }
     }
-        public void click(By locator){
-            WebElement element = wd.findElement(locator);
-            element.click();
+    public String getMessage(){
+        return wd.findElement(By.cssSelector(".dialog-container>h2")).getText();
+    }
 
+    public void pause(int time){
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
+    }
+
+        public void click(By locator){
+           WebElement element = wd.findElement(locator);
+           element.click();
+        }
+
+
 
         public boolean isElementPresent(By locator){
             List<WebElement> list = wd.findElements(locator);
