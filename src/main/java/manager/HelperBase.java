@@ -21,7 +21,7 @@ public class HelperBase {
         }
     }
     public String getMessage(){
-        pause(5000);
+        //pause(5000);
         return wd.findElement(By.cssSelector(".dialog-container>h2")).getText();
     }
 
@@ -40,13 +40,17 @@ public class HelperBase {
 
 
 
-        public boolean isElementPresent(By locator){
-           // List<WebElement> list = wd.findElements(locator);
-           // return list.size() > 0;
-            return wd.findElements(locator).size()>0;
+    boolean isElementPresent(By locator) {
+        //return wd.findElements(locator).size()>0;
+        List<WebElement> list = wd.findElements(locator);
+        return list.size()>0;
 
-        }
+    }
+    public boolean isYallaButtonNotActive() {
+        boolean res= isElementPresent(By.cssSelector("button[disabled]"));
 
-
-
+        WebElement element = wd.findElement(By.cssSelector("button[type='submit']"));
+        boolean result = element.isEnabled();
+        return res && !result;
+    }
 }
