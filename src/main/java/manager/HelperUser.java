@@ -33,4 +33,7 @@ public void clickOKButton(){
     }
 
 
+    public void logout() {
+        click(By.xpath("//*[.=' Logout ']"));
+    }
 }

@@ -41,9 +41,12 @@ public class HelperBase {
 
 
         public boolean isElementPresent(By locator){
-            List<WebElement> list = wd.findElements(locator);
-            return list.size() > 0;
+           // List<WebElement> list = wd.findElements(locator);
+           // return list.size() > 0;
+            return wd.findElements(locator).size()>0;
 
         }
+
+
 
 }
