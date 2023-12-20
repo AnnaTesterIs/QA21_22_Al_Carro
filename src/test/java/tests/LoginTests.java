@@ -7,7 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import tests.TestBase;
 
-import static org.testng.Assert.assertEquals;
+
 
 
 public class LoginTests extends TestBase {
@@ -55,7 +55,7 @@ if (app.getHelperUser().isLogged())
         app.getHelperUser().submitLogin();
         //Assert if element with text "Logged in success" is present
         Assert.assertEquals(app.getHelperUser().getMessage(), "Logged in success");
-        //app.getHelperUser().clickOKButton();
+       // app.getHelperUser().clickOKButton();
 
     }
 
@@ -80,13 +80,13 @@ if (app.getHelperUser().isLogged())
     @Test
     public void loginWrongUnregisteredUser(){
         app.getHelperUser().openLoginForm();
-        app.getHelperUser().fillLoginForm("tests.anna.book@gmail.com", "SAMASAMaa2023@");
+        app.getHelperUser().fillLoginForm("luck@gmail.com", "Luck123456$");
         app.getHelperUser().submitLogin();
         Assert.assertEquals(app.getHelperUser().getMessage(),"\"Login or Password incorrect\"");
-
     }
 
-@AfterMethod
+
+    @AfterMethod
     public void postConditions(){
    app.getHelperUser().clickOKButton();
 }

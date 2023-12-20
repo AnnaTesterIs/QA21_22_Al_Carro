@@ -1,16 +1,16 @@
 package manager;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
+import java.time.temporal.WeekFields;
 import java.util.List;
-
 public class HelperBase {
     WebDriver wd;
-
     public HelperBase(WebDriver wd) {
         this.wd = wd;
+    }
+    public void click(By locator) {
+        wd.findElement(locator).click();
     }
     public void type(By locator, String text) {
         WebElement element = wd.findElement(locator);
@@ -20,11 +20,15 @@ public class HelperBase {
             element.sendKeys(text);
         }
     }
-    public String getMessage(){
+    public String getMessage() {
+//        WebElement el = wd.findElement(By.cssSelector(".dialog-container>h2"));
+//        String text = el.getText();
+//        return text;
         //pause(5000);
-        return wd.findElement(By.cssSelector(".dialog-container>h2")).getText();
+        return
+                wd.findElement(By.cssSelector(".dialog-container>h2"))
+                        .getText();
     }
-
     public void pause(int time){
         try {
             Thread.sleep(time);
@@ -32,20 +36,13 @@ public class HelperBase {
             throw new RuntimeException(e);
         }
     }
-
-        public void click(By locator){
-           WebElement element = wd.findElement(locator);
-           element.click();
-        }
-
-
-
     boolean isElementPresent(By locator) {
         //return wd.findElements(locator).size()>0;
         List<WebElement> list = wd.findElements(locator);
-        return list.size()>0;
+        return list.size() > 0;
 
     }
+
     public boolean isYallaButtonNotActive() {
         boolean res= isElementPresent(By.cssSelector("button[disabled]"));
 
