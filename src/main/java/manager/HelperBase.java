@@ -42,7 +42,10 @@ public class HelperBase {
         return list.size() > 0;
 
     }
-
+    public void submit(){
+        wd.findElement(By.xpath("//button[@type='submit']"))
+                .click();
+    }
     public boolean isYallaButtonNotActive() {
         boolean res= isElementPresent(By.cssSelector("button[disabled]"));
 
