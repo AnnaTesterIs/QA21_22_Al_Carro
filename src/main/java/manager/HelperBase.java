@@ -1,5 +1,6 @@
 package manager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import java.time.temporal.WeekFields;
@@ -16,14 +17,15 @@ public class HelperBase {
         WebElement element = wd.findElement(locator);
         element.click();
         element.clear();
+        clearNew(element);
         if (text != null) {
             element.sendKeys(text);
         }
     }
     public String getMessage() {
-//        WebElement el = wd.findElement(By.cssSelector(".dialog-container>h2"));
-//        String text = el.getText();
-//        return text;
+        //WebElement el = wd.findElement(By.cssSelector(".dialog-container>h2"));
+       // String text = el.getText();
+       //return text;
         //pause(5000);
         return
                 wd.findElement(By.cssSelector(".dialog-container>h2"))
@@ -42,6 +44,12 @@ public class HelperBase {
         return list.size() > 0;
 
     }
+
+    public void clearNew(WebElement element){
+        element.sendKeys(" ");
+        element.sendKeys(Keys.BACK_SPACE);
+    }
+
     public void submit(){
         wd.findElement(By.xpath("//button[@type='submit']"))
                 .click();

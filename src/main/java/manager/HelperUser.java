@@ -71,16 +71,18 @@ public class HelperUser extends HelperBase {
 
     }
     public void checkPolicyXY(){
-        Dimension size  =wd.manage().window().getSize();
-        System.out.println("Width screen -->" + size.getWidth());
+        if(!wd.findElement(By.id("terms-of-use")).isSelected()) {
 
-        WebElement label = wd.findElement(By.cssSelector("label[for = 'terms-of-use']"));
-       Rectangle rect =  label.getRect();
-       int w = rect.getWidth();
-        int xOffSet = -w/2;
-        Actions actions = new Actions(wd);
-        actions.moveToElement(label, xOffSet, 0).click().release().perform();
+            Dimension size = wd.manage().window().getSize();
+            System.out.println("Width screen -->" + size.getWidth());
 
+            WebElement label = wd.findElement(By.cssSelector("label[for = 'terms-of-use']"));
+            Rectangle rect = label.getRect();
+            int w = rect.getWidth();
+            int xOffSet = -w / 2;
+            Actions actions = new Actions(wd);
+            actions.moveToElement(label, xOffSet, 0).click().release().perform();
+        }
     }
 
     public void login(User user) {
