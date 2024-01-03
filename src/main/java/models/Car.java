@@ -7,7 +7,6 @@ import lombok.*;
 @ToString
 @Builder
 
-
 public class Car {
     private String location;
     private String manufacture;

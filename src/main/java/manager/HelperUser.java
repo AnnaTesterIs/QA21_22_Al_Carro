@@ -5,15 +5,21 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import javax.swing.*;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
+
 public class HelperUser extends HelperBase {
     public HelperUser(WebDriver wd) {
         super(wd);
     }
+
+
     public void openLoginForm(){
         click(By.xpath("//a[text()=' Log in ']"));
     }
+
     public void fillLoginForm(String email, String password){
         type(By.id("email"),email);
         type(By.id("password"), password);
@@ -39,6 +45,7 @@ public class HelperUser extends HelperBase {
         return
                 isElementPresent(By.xpath("//*[.=' Logout ']"));
     }
+
     public void logout(){
         click(By.xpath("//*[.=' Logout ']"));
     }
@@ -48,46 +55,51 @@ public class HelperUser extends HelperBase {
         return wd.findElement(By.cssSelector("div.error")).getText();
     }
 
-////************Registration**************
+
+
+    /////**********************Registration************************
     public void openRegistrationForm() {
-       click(By.xpath("//a[text()= ' Sign up ']"));
-
-
-
+        click(By.xpath("//a[text()=' Sign up ']"));
     }
 
     public void fillLoginRegistrationForm(User user) {
         type(By.id("name"), user.getFirstName());
-        type(By.id("lastName"), user.getLastName());
-        type(By.id("email"), user.getEmail());
-        type(By.id("password"), user.getPassword());
+        type(By.id("lastName"),user.getLastName());
+        type(By.id("email"),user.getEmail());
+        type(By.id("password"),user.getPassword());
+
+
     }
 
     public void checkPolicy() {
-        //click(By.cssSelector("label[for = 'terms-of-use']"));
-//variant 2
-        //JavascriptExecutor js = (JavascriptExecutor) wd;
-        //js.executeScript("document.querySelector('#terms-of-use').click();");
+        //click(By.cssSelector("label[for ='terms-of-use']"));
+
+        //variant 2
+//        JavascriptExecutor js = (JavascriptExecutor) wd;
+//        js.executeScript("document.querySelector('#terms-of-use').click();");
 
     }
+
     public void checkPolicyXY(){
         if(!wd.findElement(By.id("terms-of-use")).isSelected()) {
 
             Dimension size = wd.manage().window().getSize();
-            System.out.println("Width screen -->" + size.getWidth());
+            System.out.println("Wigh screen--> " + size.getWidth());
 
-            WebElement label = wd.findElement(By.cssSelector("label[for = 'terms-of-use']"));
+            WebElement label = wd.findElement(By.cssSelector("label[for ='terms-of-use']"));
             Rectangle rect = label.getRect();
             int w = rect.getWidth();
             int xOffSet = -w / 2;
             Actions actions = new Actions(wd);
             actions.moveToElement(label, xOffSet, 0).click().release().perform();
         }
+
     }
 
     public void login(User user) {
         openLoginForm();
         fillLoginForm(user);
-         submit();
-}
+        submit();
+        clickOKButton();
+    }
 }
