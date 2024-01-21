@@ -1,18 +1,17 @@
 package manager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
-import java.time.temporal.WeekFields;
+import com.google.common.io.Files;
+import org.openqa.selenium.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+
 
 public class HelperBase {
+    Logger logger = LoggerFactory.getLogger(HelperBase.class);
+
 
     WebDriver wd;
 
@@ -55,6 +54,7 @@ public class HelperBase {
 //        String text = el.getText();
 //        return text;
         //pause(5000);
+
         return
                 wd.findElement(By.cssSelector(".dialog-container>h2"))
                         .getText();
@@ -82,5 +82,29 @@ public class HelperBase {
         WebElement element = wd.findElement(By.cssSelector("button[type='submit']"));
         boolean result = element.isEnabled();
         return res && !result;
+    }
+
+
+    public void getScreen(String link) {
+        TakesScreenshot takesScreenshot=(TakesScreenshot) wd;
+        File tmp =takesScreenshot.getScreenshotAs(OutputType.FILE);
+        try {
+            Files.copy(tmp,new File(link));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void clearTextBox(By locator){
+        WebElement el = wd.findElement(locator);
+        String os = System.getProperty("os.name");
+        System.out.println(os);
+        if(os.startsWith("Win")) {
+            el.sendKeys(Keys.CONTROL, "a");
+        }else {
+            el.sendKeys(Keys.COMMAND, "a");
+        }
+        el.sendKeys(Keys.DELETE);
+
     }
 }
